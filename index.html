@@ -3,15 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>山手線 Stamp Rally — Running Route</title>
+<title>山手線 Stamp Rally — Color Hunt Theme</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif; background: #f8f9fa; }
+  body { font-family: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif; background: #f8e890; }
   #map { height: 100vh; }
 
-  /* ===== Light Theme: Retractable Header ===== */
+  /* ===== Color Hunt Palette Theme ===== */
+  :root {
+    --green-dark: #408030;
+    --green-light: #98d870;
+    --cream: #f8e890;
+    --orange: #f89828;
+    --text-dark: #1a2e14;
+    --text-mid: #4a6a3a;
+    --text-light: #7a9a6a;
+    --white: #ffffff;
+  }
+
+  /* ===== Retractable Header ===== */
   .header-wrapper {
     position: absolute;
     top: 10px;
@@ -24,7 +36,7 @@
   .header-toggle {
     width: 38px;
     height: 38px;
-    background: #2563eb;
+    background: var(--green-dark);
     border: none;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
@@ -32,8 +44,8 @@
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(64,128,48,0.3);
     transition: all 0.25s ease;
     flex-shrink: 0;
     position: relative;
@@ -42,21 +54,22 @@
     line-height: 1;
   }
   .header-toggle:hover {
-    background: #1d4ed8;
+    background: #306820;
     transform: scale(1.04);
-    box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+    box-shadow: 0 4px 12px rgba(64,128,48,0.4);
   }
   .header-toggle:active { transform: scale(0.95); }
 
   .header-panel {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: rgba(248,232,144,0.96);
+    backdrop-filter: blur(14px);
+    border: 2px solid rgba(64,128,48,0.15);
     border-left: none;
     border-radius: 0 12px 12px 0;
     padding: 12px 18px;
     min-width: 280px;
     max-width: 320px;
-    box-shadow: 2px 2px 16px rgba(0,0,0,0.06);
+    box-shadow: 2px 2px 16px rgba(64,128,48,0.08);
     overflow: hidden;
     transition: all 0.3s ease;
     margin-left: -2px;
@@ -73,68 +86,68 @@
   }
 
   .header-panel .badge {
-    display: inline-block; background: #eff6ff; color: #2563eb; font-size: 10px;
-    padding: 2px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.3px;
+    display: inline-block; background: var(--green-dark); color: var(--white); font-size: 10px;
+    padding: 2px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 0.5px;
     margin-bottom: 6px;
   }
-  .header-panel h1 { font-size: 17px; color: #1e293b; margin-bottom: 2px; white-space: nowrap; font-weight: 700; }
+  .header-panel h1 { font-size: 17px; color: var(--text-dark); margin-bottom: 2px; white-space: nowrap; font-weight: 800; }
   .header-panel h1 span { font-size: 13px; }
-  .header-panel .sub { font-size: 11px; color: #64748b; margin-bottom: 8px; white-space: nowrap; }
+  .header-panel .sub { font-size: 11px; color: var(--text-mid); margin-bottom: 8px; white-space: nowrap; font-weight: 500; }
   .header-panel .stats { display: flex; gap: 10px; }
   .header-panel .stats .stat { text-align: center; min-width: 48px; }
-  .header-panel .stats .stat .val { font-weight: 700; color: #2563eb; font-size: 15px; font-variant-numeric: tabular-nums; }
-  .header-panel .stats .stat .lbl { color: #94a3b8; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .header-panel .stats .stat .val { font-weight: 700; color: var(--orange); font-size: 15px; font-variant-numeric: tabular-nums; text-shadow: 0 1px 0 rgba(0,0,0,0.03); }
+  .header-panel .stats .stat .lbl { color: var(--text-light); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
 
-  /* ===== Light Station Popup ===== */
+  /* ===== Station Popup ===== */
   .station-popup { font-family: -apple-system, 'Segoe UI', 'Noto Sans JP', sans-serif; line-height: 1.5; min-width: 220px; }
-  .station-popup .sp-hdr { font-size: 1em; font-weight: 700; color: #1e293b; text-align: center; padding-bottom: 5px; border-bottom: 2px solid #e2e8f0; margin-bottom: 6px; }
-  .station-popup .sp-hdr .sp-en { font-size: 0.7em; font-weight: 400; color: #64748b; display: block; }
-  .station-popup .sp-stamp { background: #fefce8; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 10px; margin-bottom: 7px; }
-  .station-popup .sp-stamp .sp-stamp-title { font-weight: 700; color: #b45309; font-size: 10px; margin-bottom: 1px; }
-  .station-popup .sp-stamp .sp-stamp-loc { color: #334155; font-size: 11px; line-height: 1.4; }
+  .station-popup .sp-hdr { font-size: 1em; font-weight: 700; color: var(--green-dark); text-align: center; padding-bottom: 5px; border-bottom: 2px solid var(--green-light); margin-bottom: 6px; }
+  .station-popup .sp-hdr .sp-en { font-size: 0.7em; font-weight: 400; color: var(--text-light); display: block; }
+  .station-popup .sp-stamp { background: #fef3d5; border: 1px solid var(--orange); border-radius: 6px; padding: 5px 10px; margin-bottom: 7px; }
+  .station-popup .sp-stamp .sp-stamp-title { font-weight: 700; color: var(--orange); font-size: 10px; margin-bottom: 1px; }
+  .station-popup .sp-stamp .sp-stamp-loc { color: var(--text-dark); font-size: 11px; line-height: 1.4; font-weight: 500; }
   .station-popup .sp-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; font-size: 12px; }
-  .station-popup .sp-row .label { color: #94a3b8; }
-  .station-popup .sp-row .dist { font-weight: 600; color: #334155; }
-  .station-popup .sp-row .here { font-weight: 700; color: #2563eb; }
+  .station-popup .sp-row .label { color: var(--text-light); font-weight: 500; }
+  .station-popup .sp-row .dist { font-weight: 600; color: var(--text-dark); }
+  .station-popup .sp-row .here { font-weight: 700; color: var(--green-dark); }
 
   .leaflet-popup-content-wrapper {
-    background: #ffffff !important;
-    color: #1e293b !important;
+    background: #faf6e8 !important;
+    color: var(--text-dark) !important;
     border-radius: 10px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
-    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(64,128,48,0.12) !important;
+    border: 1px solid rgba(64,128,48,0.1) !important;
   }
   .leaflet-popup-tip {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    background: #faf6e8 !important;
   }
 
-  /* ===== Light Station List ===== */
+  /* ===== Station List ===== */
   .station-list {
     position: absolute; bottom: 16px; left: 10px; right: 10px; z-index: 1000;
-    background: #ffffff;
+    background: rgba(250,246,232,0.96);
     border-radius: 12px;
-    box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
+    box-shadow: 0 -2px 16px rgba(64,128,48,0.06);
     max-height: 180px; overflow-y: auto;
-    border: 1px solid #e2e8f0;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(64,128,48,0.1);
     padding: 8px 12px;
   }
   .station-list::-webkit-scrollbar { width: 3px; }
-  .station-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  .station-list::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
   .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 3px; }
   .station-item {
     display: flex; align-items: center; gap: 5px; padding: 4px 7px;
     border-radius: 6px; cursor: pointer; transition: all 0.12s; font-size: 12px;
     border-left: 2px solid transparent;
   }
-  .station-item:hover { background: #f1f5f9; border-left-color: #2563eb; }
+  .station-item:hover { background: rgba(152,216,112,0.2); border-left-color: var(--green-dark); }
   .station-item .num { 
-    font-weight: 700; color: #fff; background: #2563eb; 
+    font-weight: 700; color: #fff; background: var(--green-dark); 
     width: 18px; height: 18px; border-radius: 4px; display: flex;
     align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0;
   }
-  .station-item .sname { font-weight: 600; color: #1e293b; }
-  .station-item .sdist { color: #94a3b8; font-size: 10px; margin-left: auto; }
+  .station-item .sname { font-weight: 600; color: var(--text-dark); }
+  .station-item .sdist { color: var(--text-light); font-size: 10px; margin-left: auto; }
 
   @media (max-width: 480px) {
     .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; }
@@ -150,7 +163,7 @@
 <div class="header-wrapper">
   <button class="header-toggle" id="headerToggle" onclick="toggleHeader()">🏃</button>
   <div class="header-panel collapsed" id="headerPanel">
-    <div class="badge">🚃 Stamp Rally</div>
+    <div class="badge">🌿 Stamp Rally</div>
     <h1>山手線 Running Route</h1>
     <div class="sub">Optimized route along Yamanote Line</div>
     <div class="stats">
@@ -195,9 +208,8 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   maxZoom: 19
 }).addTo(map);
 
-// Bright accent route line — visible against light tiles
 const routeLine = L.geoJSON(routeGeoJSON, {
-  style: { color: '#2563eb', weight: 5, opacity: 0.9 }
+  style: { color: '#408030', weight: 5, opacity: 0.85 }
 }).addTo(map);
 
 const bounds = routeLine.getBounds();
@@ -213,14 +225,14 @@ stationsData.forEach((s, i) => {
     '<div class="sp-row"><span class="label">📍 You Are Here</span><span class="here">' + s.name + '</span><span class="dist">—</span></div>' +
     '<div class="sp-row"><span class="label">➡ Next</span><span class="here">' + 
       stationsData[(i+1)%30].name + '</span><span class="dist">' + stationDists[i].distToNext.toFixed(2) + ' km</span></div>' +
-    '<div class="sp-row" style="border-top:1px solid #e2e8f0;margin-top:3px;padding-top:3px">' +
+    '<div class="sp-row" style="border-top:1px solid #98d870;margin-top:3px;padding-top:3px">' +
       '<span class="label">📊 Cumulative</span><span></span><span class="dist">' + s.dist_km.toFixed(1) + ' km</span></div>' +
     '</div>';
   
   const marker = L.circleMarker([s.lat, s.lon], {
     radius: 9,
-    fillColor: '#2563eb',
-    color: '#ffffff',
+    fillColor: '#f89828',
+    color: '#408030',
     weight: 3,
     fillOpacity: 0.95
   }).addTo(map);
@@ -230,7 +242,7 @@ stationsData.forEach((s, i) => {
   
   const labelIcon = L.divIcon({
     className: '',
-    html: '<div style="font-size:10px;font-weight:700;color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,0.4);text-align:center;margin-top:-14px;">' + 
+    html: '<div style="font-size:10px;font-weight:700;color:#ffffff;text-shadow:0 1px 2px rgba(0,0,0,0.5);text-align:center;margin-top:-14px;">' + 
       (s.num).toString().padStart(2,'0') + '</div>',
     iconSize: [0, 0],
     iconAnchor: [0, 0]
@@ -255,13 +267,13 @@ stationsData.forEach((s, i) => {
 const Legend = L.Control.extend({
   onAdd: function() {
     const div = L.DomUtil.create('div', '');
-    div.innerHTML = '<div style="background:#ffffff;padding:7px 11px;border-radius:8px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e2e8f0;color:#334155;">' +
+    div.innerHTML = '<div style="background:rgba(250,246,232,0.95);padding:7px 11px;border-radius:8px;font-size:11px;box-shadow:0 2px 10px rgba(64,128,48,0.08);border:1px solid rgba(64,128,48,0.1);color:#1a2e14;">' +
       '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;">' +
-      '<div style="width:18px;height:4px;background:#2563eb;border-radius:2px;"></div>' +
-      '<span style="font-weight:600;">Running Route</span><span style="color:#94a3b8;">' + 37.4 + ' km</span></div>' +
+      '<div style="width:18px;height:4px;background:#408030;border-radius:2px;"></div>' +
+      '<span style="font-weight:600;">Running Route</span><span style="color:#7a9a6a;">' + 37.4 + ' km</span></div>' +
       '<div style="display:flex;align-items:center;gap:5px;">' +
-      '<div style="width:9px;height:9px;border-radius:50%;background:#2563eb;border:2px solid #fff;"></div>' +
-      '<span style="font-weight:600;">Stamp Station</span><span style="color:#94a3b8;">30</span></div>' +
+      '<div style="width:9px;height:9px;border-radius:50%;background:#f89828;border:2px solid #408030;"></div>' +
+      '<span style="font-weight:600;">Stamp Station</span><span style="color:#7a9a6a;">30</span></div>' +
       '</div>';
     return div;
   }
