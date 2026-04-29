@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>山手線 Stamp Rally — Clean Running Route</title>
+<title>山手線 Stamp Rally — Garmin Style</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; background: #f5f0eb; }
+  body { font-family: 'Segoe UI', 'Noto Sans JP', -apple-system, sans-serif; background: #0f1923; }
   #map { height: 100vh; }
 
+  /* ===== Garmin Blue Theme: Retractable Header ===== */
   .header-wrapper {
     position: absolute;
     top: 10px;
@@ -21,18 +22,18 @@
   }
 
   .header-toggle {
-    width: 40px;
-    height: 40px;
-    background: #c62828;
+    width: 38px;
+    height: 38px;
+    background: #1e96fc;
     border: none;
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 10px 10px 0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
-    box-shadow: 0 4px 15px rgba(198,40,40,0.35);
+    box-shadow: 0 4px 15px rgba(30,150,252,0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     position: relative;
@@ -41,22 +42,22 @@
     line-height: 1;
   }
   .header-toggle:hover {
-    background: #b71c1c;
+    background: #1a7ad4;
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(198,40,40,0.45);
+    box-shadow: 0 6px 20px rgba(30,150,252,0.5);
   }
   .header-toggle:active { transform: scale(0.95); }
 
   .header-panel {
-    background: rgba(245,240,235,0.97);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(200,180,160,0.3);
+    background: rgba(15,25,35,0.94);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(30,150,252,0.2);
     border-left: none;
-    border-radius: 0 14px 14px 0;
-    padding: 14px 20px;
-    min-width: 300px;
-    max-width: 340px;
-    box-shadow: 4px 4px 20px rgba(0,0,0,0.1);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    min-width: 290px;
+    max-width: 330px;
+    box-shadow: 4px 4px 24px rgba(0,0,0,0.5);
     overflow: hidden;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     margin-left: -2px;
@@ -72,70 +73,98 @@
     pointer-events: none;
   }
 
-  .header-panel h1 { font-size: 18px; color: #c62828; margin-bottom: 4px; white-space: nowrap; }
-  .header-panel h1 span { font-size: 14px; }
-  .header-panel .sub { font-size: 12px; color: #888; margin-bottom: 8px; white-space: nowrap; }
-  .header-panel .stats { display: flex; gap: 12px; font-size: 13px; }
-  .header-panel .stats .stat { text-align: center; min-width: 50px; }
-  .header-panel .stats .stat .val { font-weight: 700; color: #c62828; font-size: 16px; }
-  .header-panel .stats .stat .lbl { color: #999; font-size: 10px; }
+  .header-panel h1 { font-size: 17px; color: #fff; margin-bottom: 2px; white-space: nowrap; font-weight: 600; letter-spacing: 0.3px; }
+  .header-panel h1 span { font-size: 13px; }
+  .header-panel .garmin-badge {
+    display: inline-block; background: #1e96fc; color: #fff; font-size: 9px;
+    padding: 1px 7px; border-radius: 3px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 6px; text-transform: uppercase;
+  }
+  .header-panel .sub { font-size: 11px; color: #8a9bb5; margin-bottom: 8px; white-space: nowrap; letter-spacing: 0.2px; }
+  .header-panel .stats { display: flex; gap: 10px; }
+  .header-panel .stats .stat { text-align: center; min-width: 48px; }
+  .header-panel .stats .stat .val { font-weight: 700; color: #1e96fc; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .header-panel .stats .stat .lbl { color: #6b7d99; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; }
 
-  .station-popup { font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; line-height: 1.6; min-width: 220px; }
-  .station-popup .sp-hdr { font-size: 1.1em; font-weight: bold; color: #c62828; text-align: center; padding-bottom: 6px; border-bottom: 2px solid #ffcdd2; margin-bottom: 6px; }
-  .station-popup .sp-hdr .sp-en { font-size: 0.7em; font-weight: normal; color: #888; display: block; }
-  .station-popup .sp-stamp { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 6px 10px; margin-bottom: 8px; font-size: 12px; }
-  .station-popup .sp-stamp .sp-stamp-title { font-weight: 700; color: #f57f17; font-size: 11px; margin-bottom: 2px; }
-  .station-popup .sp-stamp .sp-stamp-loc { color: #555; }
-  .station-popup .sp-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; font-size: 12px; }
-  .station-popup .sp-row .label { color: #888; font-size: 0.85em; }
-  .station-popup .sp-row .dist { font-weight: 600; color: #555; }
-  .station-popup .sp-row .here { font-weight: 700; color: #c62828; }
+  /* ===== Garmin Station Popup ===== */
+  .station-popup { font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; line-height: 1.5; min-width: 220px; }
+  .station-popup .sp-hdr { font-size: 1.05em; font-weight: 600; color: #1e96fc; text-align: center; padding-bottom: 5px; border-bottom: 1px solid rgba(30,150,252,0.2); margin-bottom: 6px; }
+  .station-popup .sp-hdr .sp-en { font-size: 0.7em; font-weight: 400; color: #8a9bb5; display: block; }
+  .station-popup .sp-stamp { background: rgba(30,150,252,0.08); border: 1px solid rgba(30,150,252,0.2); border-radius: 6px; padding: 5px 10px; margin-bottom: 7px; }
+  .station-popup .sp-stamp .sp-stamp-title { font-weight: 600; color: #1e96fc; font-size: 10px; margin-bottom: 1px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .station-popup .sp-stamp .sp-stamp-loc { color: #c8d6e5; font-size: 11px; }
+  .station-popup .sp-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; font-size: 11px; }
+  .station-popup .sp-row .label { color: #6b7d99; font-size: 0.85em; }
+  .station-popup .sp-row .dist { font-weight: 600; color: #c8d6e5; }
+  .station-popup .sp-row .here { font-weight: 600; color: #1e96fc; }
 
+  /* Leaflet popup styling for dark theme */
+  .leaflet-popup-content-wrapper {
+    background: #1a2535 !important;
+    color: #e0e8f0 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    border: 1px solid rgba(30,150,252,0.15) !important;
+  }
+  .leaflet-popup-tip {
+    background: #1a2535 !important;
+    border: 1px solid rgba(30,150,252,0.15) !important;
+  }
+  .leaflet-popup-close-button {
+    color: #6b7d99 !important;
+  }
+
+  /* ===== Garmin Station List ===== */
   .station-list {
-    position: absolute; bottom: 20px; left: 10px; right: 10px; z-index: 1000;
-    background: rgba(245,240,235,0.95); border-radius: 14px;
-    box-shadow: 0 -2px 20px rgba(0,0,0,0.1); max-height: 200px; overflow-y: auto;
-    backdrop-filter: blur(8px); border: 1px solid rgba(200,180,160,0.3);
-    padding: 10px 12px;
+    position: absolute; bottom: 16px; left: 10px; right: 10px; z-index: 1000;
+    background: rgba(15,25,35,0.94);
+    border-radius: 12px;
+    box-shadow: 0 -2px 24px rgba(0,0,0,0.4);
+    max-height: 180px; overflow-y: auto;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(30,150,252,0.12);
+    padding: 8px 12px;
   }
-  .station-list::-webkit-scrollbar { width: 4px; }
-  .station-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-  .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px; }
+  .station-list::-webkit-scrollbar { width: 3px; }
+  .station-list::-webkit-scrollbar-thumb { background: #1e96fc; border-radius: 3px; }
+  .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 3px; }
   .station-item {
-    display: flex; align-items: center; gap: 6px; padding: 5px 8px;
-    border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 12px;
-    border-left: 3px solid transparent;
+    display: flex; align-items: center; gap: 5px; padding: 4px 7px;
+    border-radius: 6px; cursor: pointer; transition: all 0.15s; font-size: 11px;
+    border-left: 2px solid transparent;
   }
-  .station-item:hover { background: #ffe0e0; border-left-color: #c62828; transform: translateY(-1px); }
+  .station-item:hover { background: rgba(30,150,252,0.1); border-left-color: #1e96fc; }
   .station-item .num { 
-    font-weight: 700; color: #fff; background: #c62828; 
-    width: 20px; height: 20px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0;
+    font-weight: 700; color: #fff; background: #1e96fc; 
+    width: 18px; height: 18px; border-radius: 4px; display: flex;
+    align-items: center; justify-content: center; font-size: 8px; flex-shrink: 0;
+    font-weight: 700;
   }
-  .station-item .sname { font-weight: 600; color: #333; }
-  .station-item .sdist { color: #999; font-size: 10px; margin-left: auto; }
+  .station-item .sname { font-weight: 500; color: #c8d6e5; }
+  .station-item .sdist { color: #6b7d99; font-size: 9px; margin-left: auto; }
 
   @media (max-width: 480px) {
-    .header-panel { min-width: 240px; max-width: 280px; padding: 10px 14px; }
-    .header-panel h1 { font-size: 15px; }
-    .header-panel .stats { gap: 8px; font-size: 11px; }
-    .header-panel .stats .stat .val { font-size: 14px; }
-    .station-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; }
+    .header-panel h1 { font-size: 14px; }
+    .header-panel .stats { gap: 6px; font-size: 11px; }
+    .header-panel .stats .stat .val { font-size: 13px; }
+    .station-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
   }
 </style>
 </head>
 <body>
 
 <div class="header-wrapper">
-  <button class="header-toggle" id="headerToggle" onclick="toggleHeader()">🚃</button>
+  <button class="header-toggle" id="headerToggle" onclick="toggleHeader()">🏃</button>
   <div class="header-panel collapsed" id="headerPanel">
-    <h1>🚃 山手線 Stamp Rally <span>🏃</span></h1>
-    <div class="sub">Clean Running Route along Yamanote Line</div>
+    <div class="garmin-badge">⏱ Stamp Rally</div>
+    <h1>🚃 山手線 Loop</h1>
+    <div class="sub">Optimized running route along Yamanote Line</div>
     <div class="stats">
       <div class="stat"><div class="val">37.4</div><div class="lbl">km</div></div>
-      <div class="stat"><div class="val">224</div><div class="lbl">min @10km/h</div></div>
-      <div class="stat"><div class="val">187</div><div class="lbl">min @12km/h</div></div>
-      <div class="stat"><div class="val">30</div><div class="lbl">Stamps</div></div>
+      <div class="stat"><div class="val">224</div><div class="lbl">min @10k</div></div>
+      <div class="stat"><div class="val">187</div><div class="lbl">min @12k</div></div>
+      <div class="stat"><div class="val">30</div><div class="lbl">stamps</div></div>
     </div>
   </div>
 </div>
@@ -157,24 +186,24 @@ function toggleHeader() {
   const btn = document.getElementById('headerToggle');
   headerExpanded = !headerExpanded;
   panel.classList.toggle('collapsed');
-  btn.textContent = headerExpanded ? '✕' : '🚃';
-  btn.style.borderRadius = headerExpanded ? '12px 0 0 12px' : '0 12px 12px 0';
+  btn.textContent = headerExpanded ? '✕' : '🏃';
+  btn.style.borderRadius = headerExpanded ? '10px 0 0 10px' : '0 10px 10px 0';
 }
 
 const map = L.map('map', {
   zoomControl: false,
-  attributionControl: true
+  attributionControl: false
 }).setView([35.683, 139.734], 12);
 
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
   maxZoom: 19
 }).addTo(map);
 
 const routeLine = L.geoJSON(routeGeoJSON, {
-  style: { color: '#d32f2f', weight: 5, opacity: 0.9 }
+  style: { color: '#1e96fc', weight: 4, opacity: 0.9 }
 }).addTo(map);
 
 const bounds = routeLine.getBounds();
@@ -184,30 +213,30 @@ const markers = [];
 stationsData.forEach((s, i) => {
   const popupHTML = '<div class="station-popup">' +
     '<div class="sp-hdr">🚉 #' + (s.num).toString().padStart(2,'0') + '. ' + s.name + '<span class="sp-en">' + s.name_en + '</span></div>' +
-    '<div class="sp-stamp"><div class="sp-stamp-title">📬 Stamp Location</div><div class="sp-stamp-loc">' + s.stamp + '</div></div>' +
+    '<div class="sp-stamp"><div class="sp-stamp-title">📬 Stamp</div><div class="sp-stamp-loc">' + s.stamp + '</div></div>' +
     '<div class="sp-row"><span class="label">⬅ Prev</span><span class="here">' + 
       stationsData[(i-1+30)%30].name + '</span><span class="dist">' + stationDists[i].distFromPrev.toFixed(2) + ' km</span></div>' +
     '<div class="sp-row"><span class="label">📍 Here</span><span class="here">' + s.name + '</span><span class="dist">—</span></div>' +
     '<div class="sp-row"><span class="label">➡ Next</span><span class="here">' + 
       stationsData[(i+1)%30].name + '</span><span class="dist">' + stationDists[i].distToNext.toFixed(2) + ' km</span></div>' +
-    '<div class="sp-row" style="border-top:1px solid #eee;margin-top:4px;padding-top:4px">' +
-      '<span class="label">📊 Cumulative</span><span></span><span class="dist">' + s.dist_km.toFixed(1) + ' km</span></div>' +
+    '<div class="sp-row" style="border-top:1px solid rgba(30,150,252,0.15);margin-top:3px;padding-top:3px">' +
+      '<span class="label">📊 Total</span><span></span><span class="dist">' + s.dist_km.toFixed(1) + ' km</span></div>' +
     '</div>';
   
   const marker = L.circleMarker([s.lat, s.lon], {
-    radius: 9,
-    fillColor: '#ffc107',
-    color: '#d32f2f',
-    weight: 3,
-    fillOpacity: 0.95
+    radius: 8,
+    fillColor: '#1e96fc',
+    color: '#fff',
+    weight: 2,
+    fillOpacity: 0.9
   }).addTo(map);
   
-  marker.bindPopup(popupHTML, { maxWidth: 320 });
+  marker.bindPopup(popupHTML, { maxWidth: 300 });
   markers.push(marker);
   
   const labelIcon = L.divIcon({
     className: '',
-    html: '<div style="font-size:10px;font-weight:700;color:#d32f2f;text-shadow:0 0 3px #fff,0 0 3px #fff;text-align:center;margin-top:-12px;">' + 
+    html: '<div style="font-size:9px;font-weight:700;color:#1e96fc;text-shadow:0 0 4px #000,0 0 4px #000;text-align:center;margin-top:-10px;">' + 
       (s.num).toString().padStart(2,'0') + '</div>',
     iconSize: [0, 0],
     iconAnchor: [0, 0]
@@ -232,18 +261,20 @@ stationsData.forEach((s, i) => {
 const Legend = L.Control.extend({
   onAdd: function() {
     const div = L.DomUtil.create('div', '');
-    div.innerHTML = '<div style="background:rgba(255,255,255,0.95);padding:8px 12px;border-radius:10px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:1px solid #ddd;">' +
-      '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">' +
-      '<div style="width:20px;height:4px;background:#d32f2f;border-radius:2px;"></div>' +
-      '<span style="font-weight:600;">Running Route</span><span style="color:#888;font-size:10px;">37.4 km</span></div>' +
-      '<div style="display:flex;align-items:center;gap:6px;">' +
-      '<div style="width:10px;height:10px;border-radius:50%;background:#ffc107;border:2px solid #d32f2f;"></div>' +
-      '<span style="font-weight:600;">Stamp Stations</span><span style="color:#888;font-size:10px;">30 stations</span></div>' +
+    div.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;">' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;">' +
+      '<div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div>' +
+      '<span style="font-weight:500;">Route</span><span style="color:#6b7d99;">37.4 km</span></div>' +
+      '<div style="display:flex;align-items:center;gap:5px;">' +
+      '<div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div>' +
+      '<span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div>' +
       '</div>';
     return div;
   }
 });
 new Legend({ position: 'bottomright' }).addTo(map);
+
+L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; CARTO').addTo(map);
 </script>
 </body>
 </html>
