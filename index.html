@@ -158,8 +158,8 @@
     <div class="sub">Optimized running route along Yamanote Line</div>
     <div class="stats">
       <div class="stat"><div class="val">37.4</div><div class="lbl">Total km</div></div>
-      <div class="stat"><div class="val">224</div><div class="lbl">6:00 min/km</div></div>
-      <div class="stat"><div class="val">187</div><div class="lbl">5:00 min/km</div></div>
+      <div class="stat"><div class="val">3:44</div><div class="lbl">6:00 min/km</div></div>
+      <div class="stat"><div class="val">3:07</div><div class="lbl">5:00 min/km</div></div>
       <div class="stat"><div class="val">30</div><div class="lbl">Stations</div></div>
     </div>
   </div>
@@ -193,13 +193,13 @@ const map = L.map('map', {
 
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
   maxZoom: 19
 }).addTo(map);
 
 const routeLine = L.geoJSON(routeGeoJSON, {
-  style: { color: '#1e96fc', weight: 4, opacity: 0.9 }
+  style: { color: '#1a7ad4', weight: 5, opacity: 0.85 }
 }).addTo(map);
 
 const bounds = routeLine.getBounds();
