@@ -4,199 +4,197 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata>
-    <name>山手線 Stamp Rally Corrected Route</name>
-    <desc>Yamanote Line Stamp Rally Route — visits all 30 stations. 40.3km running route along Yamanote corridor.</desc>
-    <time>2026-04-29T01:44:49Z</time>
+    <name>山手線 Stamp Rally Clean Route</name>
+    <desc>Yamanote Line Stamp Rally Route — clean smooth track along railway corridor. 37.4km. Stations marked as waypoints — step off loop to collect stamps.</desc>
+    <time>2026-04-29T01:56:39Z</time>
     <author><name>Tiny爪</name></author>
   </metadata>
   <wpt lat="35.680596" lon="139.764971">
     <name>東京</name>
-    <cmt>Stamp #01 — 東京 Station</cmt>
+    <cmt>Stamp #01 — 東京 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #01</desc>
+    <desc>Yamanote Line Stamp #01 — 東京. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.695281" lon="139.770491">
     <name>神田</name>
-    <cmt>Stamp #02 — 神田 Station</cmt>
+    <cmt>Stamp #02 — 神田 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #02</desc>
+    <desc>Yamanote Line Stamp #02 — 神田. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.697527" lon="139.772604">
     <name>秋葉原</name>
-    <cmt>Stamp #03 — 秋葉原 Station</cmt>
+    <cmt>Stamp #03 — 秋葉原 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #03</desc>
+    <desc>Yamanote Line Stamp #03 — 秋葉原. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.706953" lon="139.77463">
     <name>御徒町</name>
-    <cmt>Stamp #04 — 御徒町 Station</cmt>
+    <cmt>Stamp #04 — 御徒町 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #04</desc>
+    <desc>Yamanote Line Stamp #04 — 御徒町. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.711973" lon="139.777006">
     <name>上野</name>
-    <cmt>Stamp #05 — 上野 Station</cmt>
+    <cmt>Stamp #05 — 上野 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #05</desc>
+    <desc>Yamanote Line Stamp #05 — 上野. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.721703" lon="139.777917">
     <name>鶯谷</name>
-    <cmt>Stamp #06 — 鶯谷 Station</cmt>
+    <cmt>Stamp #06 — 鶯谷 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #06</desc>
+    <desc>Yamanote Line Stamp #06 — 鶯谷. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.728006" lon="139.771378">
     <name>日暮里</name>
-    <cmt>Stamp #07 — 日暮里 Station</cmt>
+    <cmt>Stamp #07 — 日暮里 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #07</desc>
+    <desc>Yamanote Line Stamp #07 — 日暮里. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.732584" lon="139.767217">
     <name>西日暮里</name>
-    <cmt>Stamp #08 — 西日暮里 Station</cmt>
+    <cmt>Stamp #08 — 西日暮里 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #08</desc>
+    <desc>Yamanote Line Stamp #08 — 西日暮里. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.738249" lon="139.760255">
     <name>田端</name>
-    <cmt>Stamp #09 — 田端 Station</cmt>
+    <cmt>Stamp #09 — 田端 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #09</desc>
+    <desc>Yamanote Line Stamp #09 — 田端. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.736585" lon="139.747241">
     <name>駒込</name>
-    <cmt>Stamp #10 — 駒込 Station</cmt>
+    <cmt>Stamp #10 — 駒込 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #10</desc>
+    <desc>Yamanote Line Stamp #10 — 駒込. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.733412" lon="139.739427">
     <name>巣鴨</name>
-    <cmt>Stamp #11 — 巣鴨 Station</cmt>
+    <cmt>Stamp #11 — 巣鴨 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #11</desc>
+    <desc>Yamanote Line Stamp #11 — 巣鴨. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.731685" lon="139.728588">
     <name>大塚</name>
-    <cmt>Stamp #12 — 大塚 Station</cmt>
+    <cmt>Stamp #12 — 大塚 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #12</desc>
+    <desc>Yamanote Line Stamp #12 — 大塚. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.730443" lon="139.708875">
     <name>池袋</name>
-    <cmt>Stamp #13 — 池袋 Station</cmt>
+    <cmt>Stamp #13 — 池袋 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #13</desc>
+    <desc>Yamanote Line Stamp #13 — 池袋. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.721727" lon="139.706562">
     <name>目白</name>
-    <cmt>Stamp #14 — 目白 Station</cmt>
+    <cmt>Stamp #14 — 目白 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #14</desc>
+    <desc>Yamanote Line Stamp #14 — 目白. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.71264" lon="139.703874">
     <name>高田馬場</name>
-    <cmt>Stamp #15 — 高田馬場 Station</cmt>
+    <cmt>Stamp #15 — 高田馬場 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #15</desc>
+    <desc>Yamanote Line Stamp #15 — 高田馬場. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.701495" lon="139.699932">
     <name>新大久保</name>
-    <cmt>Stamp #16 — 新大久保 Station</cmt>
+    <cmt>Stamp #16 — 新大久保 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #16</desc>
+    <desc>Yamanote Line Stamp #16 — 新大久保. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.6895" lon="139.7004">
     <name>新宿</name>
-    <cmt>Stamp #17 — 新宿 Station</cmt>
+    <cmt>Stamp #17 — 新宿 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #17</desc>
+    <desc>Yamanote Line Stamp #17 — 新宿. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.683946" lon="139.701656">
     <name>代々木</name>
-    <cmt>Stamp #18 — 代々木 Station</cmt>
+    <cmt>Stamp #18 — 代々木 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #18</desc>
+    <desc>Yamanote Line Stamp #18 — 代々木. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.670502" lon="139.702414">
     <name>原宿</name>
-    <cmt>Stamp #19 — 原宿 Station</cmt>
+    <cmt>Stamp #19 — 原宿 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #19</desc>
+    <desc>Yamanote Line Stamp #19 — 原宿. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.658967" lon="139.700354">
     <name>渋谷</name>
-    <cmt>Stamp #20 — 渋谷 Station</cmt>
+    <cmt>Stamp #20 — 渋谷 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #20</desc>
+    <desc>Yamanote Line Stamp #20 — 渋谷. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.646441" lon="139.710208">
     <name>恵比寿</name>
-    <cmt>Stamp #21 — 恵比寿 Station</cmt>
+    <cmt>Stamp #21 — 恵比寿 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #21</desc>
+    <desc>Yamanote Line Stamp #21 — 恵比寿. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.61939" lon="139.728487">
     <name>大崎</name>
-    <cmt>Stamp #22 — 大崎 Station</cmt>
+    <cmt>Stamp #22 — 大崎 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #22</desc>
+    <desc>Yamanote Line Stamp #22 — 大崎. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.62649" lon="139.724345">
     <name>五反田</name>
-    <cmt>Stamp #23 — 五反田 Station</cmt>
+    <cmt>Stamp #23 — 五反田 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #23</desc>
+    <desc>Yamanote Line Stamp #23 — 五反田. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.632508" lon="139.715772">
     <name>目黒</name>
-    <cmt>Stamp #24 — 目黒 Station</cmt>
+    <cmt>Stamp #24 — 目黒 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #24</desc>
+    <desc>Yamanote Line Stamp #24 — 目黒. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.628004" lon="139.738008">
     <name>品川</name>
-    <cmt>Stamp #25 — 品川 Station</cmt>
+    <cmt>Stamp #25 — 品川 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #25</desc>
+    <desc>Yamanote Line Stamp #25 — 品川. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.6354" lon="139.7407">
     <name>高輪ゲートウェイ</name>
-    <cmt>Stamp #26 — 高輪ゲートウェイ Station</cmt>
+    <cmt>Stamp #26 — 高輪ゲートウェイ Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #26</desc>
+    <desc>Yamanote Line Stamp #26 — 高輪ゲートウェイ. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.645667" lon="139.747465">
     <name>田町</name>
-    <cmt>Stamp #27 — 田町 Station</cmt>
+    <cmt>Stamp #27 — 田町 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #27</desc>
+    <desc>Yamanote Line Stamp #27 — 田町. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.655111" lon="139.757062">
     <name>浜松町</name>
-    <cmt>Stamp #28 — 浜松町 Station</cmt>
+    <cmt>Stamp #28 — 浜松町 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #28</desc>
+    <desc>Yamanote Line Stamp #28 — 浜松町. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.666915" lon="139.758519">
     <name>新橋</name>
-    <cmt>Stamp #29 — 新橋 Station</cmt>
+    <cmt>Stamp #29 — 新橋 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #29</desc>
+    <desc>Yamanote Line Stamp #29 — 新橋. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <wpt lat="35.6756" lon="139.763303">
     <name>有楽町</name>
-    <cmt>Stamp #30 — 有楽町 Station</cmt>
+    <cmt>Stamp #30 — 有楽町 Station — Step off the running loop here to collect your stamp</cmt>
     <sym>railroad-station</sym>
-    <desc>Yamanote Line Stamp Station #30</desc>
+    <desc>Yamanote Line Stamp #30 — 有楽町. Stamp located at ticket gate area / station office.</desc>
   </wpt>
   <trk>
     <name>山手線 Stamp Rally Running Route</name>
     <type>running</type>
-    <desc>Corrected route: 40.3km, visits all 30 Yamanote stations for stamp collection.</desc>
+    <desc>Clean smooth running route: 37.4km along Yamanote corridor. 30 stamp stations marked as waypoints.</desc>
     <trkseg>
-      <trkpt lat="35.680596" lon="139.764971">
-      </trkpt>
-      <trkpt lat="35.680912" lon="139.764946">
+      <trkpt lat="35.681017" lon="139.764937">
       </trkpt>
       <trkpt lat="35.681355" lon="139.764915">
       </trkpt>
@@ -278,9 +276,7 @@
       </trkpt>
       <trkpt lat="35.695496" lon="139.769655">
       </trkpt>
-      <trkpt lat="35.695281" lon="139.770491">
-      </trkpt>
-      <trkpt lat="35.695618" lon="139.770084">
+      <trkpt lat="35.695731" lon="139.769949">
       </trkpt>
       <trkpt lat="35.695912" lon="139.770317">
       </trkpt>
@@ -298,9 +294,7 @@
       </trkpt>
       <trkpt lat="35.697226" lon="139.772336">
       </trkpt>
-      <trkpt lat="35.697527" lon="139.772604">
-      </trkpt>
-      <trkpt lat="35.697413" lon="139.772630">
+      <trkpt lat="35.697376" lon="139.772639">
       </trkpt>
       <trkpt lat="35.697569" lon="139.772938">
       </trkpt>
@@ -358,9 +352,7 @@
       </trkpt>
       <trkpt lat="35.706584" lon="139.775453">
       </trkpt>
-      <trkpt lat="35.706953" lon="139.774630">
-      </trkpt>
-      <trkpt lat="35.706933" lon="139.775273">
+      <trkpt lat="35.706927" lon="139.775487">
       </trkpt>
       <trkpt lat="35.707273" lon="139.775518">
       </trkpt>
@@ -388,9 +380,7 @@
       </trkpt>
       <trkpt lat="35.711288" lon="139.777300">
       </trkpt>
-      <trkpt lat="35.711973" lon="139.777006">
-      </trkpt>
-      <trkpt lat="35.711739" lon="139.777443">
+      <trkpt lat="35.711661" lon="139.777588">
       </trkpt>
       <trkpt lat="35.712058" lon="139.777886">
       </trkpt>
@@ -456,9 +446,7 @@
       </trkpt>
       <trkpt lat="35.721225" lon="139.778749">
       </trkpt>
-      <trkpt lat="35.721703" lon="139.777917">
-      </trkpt>
-      <trkpt lat="35.721543" lon="139.778651">
+      <trkpt lat="35.721490" lon="139.778895">
       </trkpt>
       <trkpt lat="35.721793" lon="139.778929">
       </trkpt>
@@ -514,9 +502,7 @@
       </trkpt>
       <trkpt lat="35.727898" lon="139.771642">
       </trkpt>
-      <trkpt lat="35.728006" lon="139.771378">
-      </trkpt>
-      <trkpt lat="35.727987" lon="139.771273">
+      <trkpt lat="35.727981" lon="139.771238">
       </trkpt>
       <trkpt lat="35.728044" lon="139.770840">
       </trkpt>
@@ -570,9 +556,7 @@
       </trkpt>
       <trkpt lat="35.732317" lon="139.766400">
       </trkpt>
-      <trkpt lat="35.732584" lon="139.767217">
-      </trkpt>
-      <trkpt lat="35.732627" lon="139.766596">
+      <trkpt lat="35.732641" lon="139.766389">
       </trkpt>
       <trkpt lat="35.732996" lon="139.766329">
       </trkpt>
@@ -622,9 +606,7 @@
       </trkpt>
       <trkpt lat="35.738433" lon="139.760600">
       </trkpt>
-      <trkpt lat="35.738249" lon="139.760255">
-      </trkpt>
-      <trkpt lat="35.738450" lon="139.760243">
+      <trkpt lat="35.738517" lon="139.760239">
       </trkpt>
       <trkpt lat="35.738595" lon="139.759874">
       </trkpt>
@@ -716,9 +698,7 @@
       </trkpt>
       <trkpt lat="35.737421" lon="139.747552">
       </trkpt>
-      <trkpt lat="35.736585" lon="139.747241">
-      </trkpt>
-      <trkpt lat="35.737144" lon="139.747211">
+      <trkpt lat="35.737330" lon="139.747200">
       </trkpt>
       <trkpt lat="35.737273" lon="139.746846">
       </trkpt>
@@ -764,9 +744,7 @@
       </trkpt>
       <trkpt lat="35.733776" lon="139.739589">
       </trkpt>
-      <trkpt lat="35.733412" lon="139.739427">
-      </trkpt>
-      <trkpt lat="35.733561" lon="139.739281">
+      <trkpt lat="35.733610" lon="139.739233">
       </trkpt>
       <trkpt lat="35.733464" lon="139.738887">
       </trkpt>
@@ -822,9 +800,7 @@
       </trkpt>
       <trkpt lat="35.732048" lon="139.729057">
       </trkpt>
-      <trkpt lat="35.731685" lon="139.728588">
-      </trkpt>
-      <trkpt lat="35.731985" lon="139.728668">
+      <trkpt lat="35.732085" lon="139.728695">
       </trkpt>
       <trkpt lat="35.732104" lon="139.728332">
       </trkpt>
@@ -938,9 +914,7 @@
       </trkpt>
       <trkpt lat="35.730665" lon="139.708949">
       </trkpt>
-      <trkpt lat="35.730443" lon="139.708875">
-      </trkpt>
-      <trkpt lat="35.730380" lon="139.708835">
+      <trkpt lat="35.730359" lon="139.708822">
       </trkpt>
       <trkpt lat="35.730026" lon="139.708700">
       </trkpt>
@@ -992,9 +966,7 @@
       </trkpt>
       <trkpt lat="35.722057" lon="139.707088">
       </trkpt>
-      <trkpt lat="35.721727" lon="139.706562">
-      </trkpt>
-      <trkpt lat="35.721672" lon="139.706885">
+      <trkpt lat="35.721654" lon="139.706993">
       </trkpt>
       <trkpt lat="35.721240" lon="139.706893">
       </trkpt>
@@ -1040,9 +1012,7 @@
       </trkpt>
       <trkpt lat="35.713023" lon="139.704088">
       </trkpt>
-      <trkpt lat="35.712640" lon="139.703874">
-      </trkpt>
-      <trkpt lat="35.712702" lon="139.703942">
+      <trkpt lat="35.712722" lon="139.703965">
       </trkpt>
       <trkpt lat="35.712427" lon="139.703856">
       </trkpt>
@@ -1112,9 +1082,7 @@
       </trkpt>
       <trkpt lat="35.701572" lon="139.700935">
       </trkpt>
-      <trkpt lat="35.701495" lon="139.699932">
-      </trkpt>
-      <trkpt lat="35.701341" lon="139.700642">
+      <trkpt lat="35.701290" lon="139.700878">
       </trkpt>
       <trkpt lat="35.701007" lon="139.700821">
       </trkpt>
@@ -1200,9 +1168,7 @@
       </trkpt>
       <trkpt lat="35.689294" lon="139.701679">
       </trkpt>
-      <trkpt lat="35.689500" lon="139.700400">
-      </trkpt>
-      <trkpt lat="35.689288" lon="139.701104">
+      <trkpt lat="35.689217" lon="139.701338">
       </trkpt>
       <trkpt lat="35.688943" lon="139.701323">
       </trkpt>
@@ -1234,9 +1200,7 @@
       </trkpt>
       <trkpt lat="35.684320" lon="139.701168">
       </trkpt>
-      <trkpt lat="35.683946" lon="139.701656">
-      </trkpt>
-      <trkpt lat="35.683975" lon="139.701408">
+      <trkpt lat="35.683984" lon="139.701326">
       </trkpt>
       <trkpt lat="35.683658" lon="139.701523">
       </trkpt>
@@ -1332,9 +1296,7 @@
       </trkpt>
       <trkpt lat="35.670874" lon="139.702689">
       </trkpt>
-      <trkpt lat="35.670502" lon="139.702414">
-      </trkpt>
-      <trkpt lat="35.670553" lon="139.702518">
+      <trkpt lat="35.670570" lon="139.702553">
       </trkpt>
       <trkpt lat="35.670308" lon="139.702448">
       </trkpt>
@@ -1402,9 +1364,7 @@
       </trkpt>
       <trkpt lat="35.659298" lon="139.700628">
       </trkpt>
-      <trkpt lat="35.658967" lon="139.700354">
-      </trkpt>
-      <trkpt lat="35.658999" lon="139.700559">
+      <trkpt lat="35.659010" lon="139.700627">
       </trkpt>
       <trkpt lat="35.658683" lon="139.700635">
       </trkpt>
@@ -1490,9 +1450,7 @@
       </trkpt>
       <trkpt lat="35.646491" lon="139.709323">
       </trkpt>
-      <trkpt lat="35.646441" lon="139.710208">
-      </trkpt>
-      <trkpt lat="35.646211" lon="139.709627">
+      <trkpt lat="35.646135" lon="139.709434">
       </trkpt>
       <trkpt lat="35.645786" lon="139.709545">
       </trkpt>
@@ -1666,9 +1624,7 @@
       </trkpt>
       <trkpt lat="35.620506" lon="139.726682">
       </trkpt>
-      <trkpt lat="35.619390" lon="139.728487">
-      </trkpt>
-      <trkpt lat="35.620090" lon="139.727357">
+      <trkpt lat="35.620323" lon="139.726981">
       </trkpt>
       <trkpt lat="35.620438" lon="139.726600">
       </trkpt>
@@ -1714,9 +1670,7 @@
       </trkpt>
       <trkpt lat="35.626223" lon="139.724215">
       </trkpt>
-      <trkpt lat="35.626490" lon="139.724345">
-      </trkpt>
-      <trkpt lat="35.626495" lon="139.724192">
+      <trkpt lat="35.626497" lon="139.724141">
       </trkpt>
       <trkpt lat="35.626701" lon="139.723830">
       </trkpt>
@@ -1764,9 +1718,7 @@
       </trkpt>
       <trkpt lat="35.631599" lon="139.716925">
       </trkpt>
-      <trkpt lat="35.632508" lon="139.715772">
-      </trkpt>
-      <trkpt lat="35.631916" lon="139.716401">
+      <trkpt lat="35.631718" lon="139.716610">
       </trkpt>
       <trkpt lat="35.631558" lon="139.716913">
       </trkpt>
@@ -1874,9 +1826,7 @@
       </trkpt>
       <trkpt lat="35.628808" lon="139.736956">
       </trkpt>
-      <trkpt lat="35.628004" lon="139.738008">
-      </trkpt>
-      <trkpt lat="35.628747" lon="139.737441">
+      <trkpt lat="35.628995" lon="139.737253">
       </trkpt>
       <trkpt lat="35.629257" lon="139.737494">
       </trkpt>
@@ -1916,9 +1866,7 @@
       </trkpt>
       <trkpt lat="35.635354" lon="139.739471">
       </trkpt>
-      <trkpt lat="35.635400" lon="139.740700">
-      </trkpt>
-      <trkpt lat="35.635609" lon="139.739871">
+      <trkpt lat="35.635678" lon="139.739595">
       </trkpt>
       <trkpt lat="35.635994" lon="139.739720">
       </trkpt>
@@ -1984,9 +1932,7 @@
       </trkpt>
       <trkpt lat="35.646109" lon="139.746424">
       </trkpt>
-      <trkpt lat="35.645667" lon="139.747465">
-      </trkpt>
-      <trkpt lat="35.646153" lon="139.746919">
+      <trkpt lat="35.646315" lon="139.746737">
       </trkpt>
       <trkpt lat="35.646493" lon="139.747063">
       </trkpt>
@@ -2056,9 +2002,7 @@
       </trkpt>
       <trkpt lat="35.655365" lon="139.754939">
       </trkpt>
-      <trkpt lat="35.655111" lon="139.757062">
-      </trkpt>
-      <trkpt lat="35.655498" lon="139.755546">
+      <trkpt lat="35.655628" lon="139.755040">
       </trkpt>
       <trkpt lat="35.655904" lon="139.755143">
       </trkpt>
@@ -2120,9 +2064,7 @@
       </trkpt>
       <trkpt lat="35.666460" lon="139.758786">
       </trkpt>
-      <trkpt lat="35.666915" lon="139.758519">
-      </trkpt>
-      <trkpt lat="35.666804" lon="139.758786">
+      <trkpt lat="35.666767" lon="139.758875">
       </trkpt>
       <trkpt lat="35.667064" lon="139.758966">
       </trkpt>
@@ -2182,9 +2124,7 @@
       </trkpt>
       <trkpt lat="35.675321" lon="139.763321">
       </trkpt>
-      <trkpt lat="35.675600" lon="139.763303">
-      </trkpt>
-      <trkpt lat="35.675589" lon="139.763389">
+      <trkpt lat="35.675585" lon="139.763418">
       </trkpt>
       <trkpt lat="35.675852" lon="139.763525">
       </trkpt>
@@ -2210,7 +2150,7 @@
       </trkpt>
       <trkpt lat="35.678762" lon="139.765158">
       </trkpt>
-      <trkpt lat="35.680596" lon="139.764971">
+      <trkpt lat="35.681017" lon="139.764937">
       </trkpt>
     </trkseg>
   </trk>
