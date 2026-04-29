@@ -5,8 +5,8 @@
   xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata>
     <name>山手線 Stamp Rally Walkable Route</name>
-    <desc>Yamanote Line Stamp Rally — walkable roads, visits ALL 30 stations. 48.8km. OSRM foot profile.</desc>
-    <time>2026-04-29T03:15:13Z</time>
+    <desc>Yamanote Line Stamp Rally — OSRM foot. 48.8km. Visits all 30 stations.</desc>
+    <time>2026-04-29T08:04:59Z</time>
     <author><name>Tiny爪</name></author>
   </metadata>
   <wpt lat="35.680596" lon="139.764971">
@@ -192,7 +192,7 @@
   <trk>
     <name>山手線 Stamp Rally Walkable Route</name>
     <type>running</type>
-    <desc>48.8km — OSRM foot profile on walkable roads. Visits all 30 stations.</desc>
+    <desc>48.8km — OSRM foot on walkable roads. All 30 stations.</desc>
     <trkseg>
       <trkpt lat="35.680592" lon="139.764961">
       </trkpt>

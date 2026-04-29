@@ -12,30 +12,16 @@
   #map { height: 100vh; }
 
   .header-wrapper { position: absolute; top: 10px; left: 0; z-index: 1000; display: flex; align-items: flex-start; }
-
-  .header-toggle {
-    width: 38px; height: 38px; background: #1e96fc; border: none;
-    border-radius: 0 10px 10px 0; cursor: pointer; display: flex;
-    align-items: center; justify-content: center; font-size: 16px; color: #fff;
-    box-shadow: 0 4px 15px rgba(30,150,252,0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    flex-shrink: 0; position: relative; z-index: 2; padding: 0; line-height: 1;
-  }
+  .header-toggle { width: 38px; height: 38px; background: #1e96fc; border: none; border-radius: 0 10px 10px 0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; box-shadow: 0 4px 15px rgba(30,150,252,0.4); transition: all 0.3s ease; flex-shrink: 0; position: relative; z-index: 2; padding: 0; line-height: 1; }
   .header-toggle:hover { background: #1a7ad4; transform: scale(1.05); }
   .header-toggle:active { transform: scale(0.95); }
 
-  .header-panel {
-    background: rgba(15,25,35,0.94); backdrop-filter: blur(14px);
-    border: 1px solid rgba(30,150,252,0.2); border-left: none;
-    border-radius: 0 12px 12px 0; padding: 14px 18px;
-    min-width: 290px; max-width: 330px; box-shadow: 4px 4px 24px rgba(0,0,0,0.5);
-    overflow: hidden; transition: all 0.35s ease; margin-left: -2px;
-  }
+  .header-panel { background: rgba(15,25,35,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(30,150,252,0.2); border-left: none; border-radius: 0 12px 12px 0; padding: 14px 18px; min-width: 290px; max-width: 330px; box-shadow: 4px 4px 24px rgba(0,0,0,0.5); overflow: hidden; transition: all 0.35s ease; margin-left: -2px; }
   .header-panel.collapsed { max-width: 0; min-width: 0; padding: 14px 0; border: none; box-shadow: none; opacity: 0; pointer-events: none; }
 
   .header-panel .badge { display: inline-block; background: #1e96fc; color: #fff; font-size: 9px; padding: 1px 7px; border-radius: 3px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
-  .header-panel h1 { font-size: 17px; color: #fff; margin-bottom: 2px; white-space: nowrap; font-weight: 600; letter-spacing: 0.3px; }
-  .header-panel .sub { font-size: 11px; color: #8a9bb5; margin-bottom: 8px; white-space: nowrap; letter-spacing: 0.2px; }
+  .header-panel h1 { font-size: 17px; color: #fff; margin-bottom: 2px; white-space: nowrap; font-weight: 600; }
+  .header-panel .sub { font-size: 11px; color: #8a9bb5; margin-bottom: 8px; white-space: nowrap; }
   .header-panel .stats { display: flex; gap: 10px; }
   .header-panel .stats .stat { text-align: center; min-width: 48px; }
   .header-panel .stats .stat .val { font-weight: 700; color: #1e96fc; font-size: 15px; font-variant-numeric: tabular-nums; }
@@ -56,12 +42,7 @@
   .leaflet-popup-tip { background: #1a2535 !important; }
   .leaflet-popup-close-button { color: #6b7d99 !important; }
 
-  .station-list {
-    position: absolute; bottom: 16px; left: 10px; right: 10px; z-index: 1000;
-    background: rgba(15,25,35,0.94); border-radius: 12px;
-    box-shadow: 0 -2px 24px rgba(0,0,0,0.4); max-height: 180px; overflow-y: auto;
-    backdrop-filter: blur(14px); border: 1px solid rgba(30,150,252,0.12); padding: 8px 12px;
-  }
+  .station-list { position: absolute; bottom: 16px; left: 10px; right: 10px; z-index: 1000; background: rgba(15,25,35,0.94); border-radius: 12px; box-shadow: 0 -2px 24px rgba(0,0,0,0.4); max-height: 180px; overflow-y: auto; backdrop-filter: blur(14px); border: 1px solid rgba(30,150,252,0.12); padding: 8px 12px; }
   .station-list::-webkit-scrollbar { width: 3px; }
   .station-list::-webkit-scrollbar-thumb { background: #1e96fc; border-radius: 3px; }
   .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 3px; }
@@ -71,13 +52,7 @@
   .station-item .sname { font-weight: 500; color: #c8d6e5; }
   .station-item .sdist { color: #6b7d99; font-size: 9px; margin-left: auto; }
 
-  @media (max-width: 480px) {
-    .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; }
-    .header-panel h1 { font-size: 14px; }
-    .header-panel .stats { gap: 6px; }
-    .header-panel .stats .stat .val { font-size: 13px; }
-    .station-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
-  }
+  @media (max-width: 480px) { .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; } .header-panel h1 { font-size: 14px; } .station-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); } }
 </style>
 </head>
 <body>
@@ -90,8 +65,8 @@
     <div class="sub">Walkable roads — visits all 30 stations</div>
     <div class="stats">
       <div class="stat"><div class="val">48.8</div><div class="lbl">Total km</div></div>
-      <div class="stat"><div class="val">4:53</div><div class="lbl">6:00 min/km</div></div>
-      <div class="stat"><div class="val">4:04</div><div class="lbl">5:00 min/km</div></div>
+      <div class="stat"><div class="val">4:52</div><div class="lbl">6:00 min/km</div></div>
+      <div class="stat"><div class="val">4:03</div><div class="lbl">5:00 min/km</div></div>
       <div class="stat"><div class="val">30</div><div class="lbl">Stations</div></div>
     </div>
   </div>
@@ -109,67 +84,38 @@ const stationsData = [{"num": 1, "name": "東京", "name_en": "Tokyo", "lat": 35
 const stationDists = [{"distFromPrev": 0.65, "distToNext": 2.32}, {"distFromPrev": 2.32, "distToNext": 0.42}, {"distFromPrev": 0.42, "distToNext": 1.39}, {"distFromPrev": 1.39, "distToNext": 0.69}, {"distFromPrev": 0.69, "distToNext": 2.56}, {"distFromPrev": 2.56, "distToNext": 1.19}, {"distFromPrev": 1.19, "distToNext": 1.26}, {"distFromPrev": 1.26, "distToNext": 1.4}, {"distFromPrev": 1.4, "distToNext": 2.2}, {"distFromPrev": 2.2, "distToNext": 0.99}, {"distFromPrev": 0.99, "distToNext": 1.34}, {"distFromPrev": 1.34, "distToNext": 2.5}, {"distFromPrev": 2.5, "distToNext": 1.34}, {"distFromPrev": 1.34, "distToNext": 1.38}, {"distFromPrev": 1.38, "distToNext": 1.52}, {"distFromPrev": 1.52, "distToNext": 2.03}, {"distFromPrev": 2.03, "distToNext": 0.75}, {"distFromPrev": 0.75, "distToNext": 1.98}, {"distFromPrev": 1.98, "distToNext": 1.38}, {"distFromPrev": 1.38, "distToNext": 1.79}, {"distFromPrev": 1.79, "distToNext": 4.31}, {"distFromPrev": 4.31, "distToNext": 1.34}, {"distFromPrev": 1.34, "distToNext": 1.45}, {"distFromPrev": 1.45, "distToNext": 2.87}, {"distFromPrev": 2.87, "distToNext": 1.07}, {"distFromPrev": 1.07, "distToNext": 1.73}, {"distFromPrev": 1.73, "distToNext": 1.82}, {"distFromPrev": 1.82, "distToNext": 1.79}, {"distFromPrev": 1.79, "distToNext": 1.31}, {"distFromPrev": 1.31, "distToNext": 0.65}];
 
 let headerExpanded = false;
-function toggleHeader() {
-  const panel = document.getElementById('headerPanel');
-  const btn = document.getElementById('headerToggle');
-  headerExpanded = !headerExpanded;
-  panel.classList.toggle('collapsed');
-  btn.textContent = headerExpanded ? '✕' : '🏃';
-  btn.style.borderRadius = headerExpanded ? '10px 0 0 10px' : '0 10px 10px 0';
-}
+function toggleHeader() { const p = document.getElementById('headerPanel'); const b = document.getElementById('headerToggle'); headerExpanded = !headerExpanded; p.classList.toggle('collapsed'); b.textContent = headerExpanded ? '✕' : '🏃'; b.style.borderRadius = headerExpanded ? '10px 0 0 10px' : '0 10px 10px 0'; }
 
 const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([35.683, 139.734], 12);
 L.control.zoom({ position: 'topright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM &copy; CARTO', maxZoom: 19 }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  maxZoom: 19
-}).addTo(map);
-
-const routeLine = L.geoJSON(routeGeoJSON, {
-  style: { color: '#1a7ad4', weight: 5, opacity: 0.85 }
-}).addTo(map);
-
+const routeLine = L.geoJSON(routeGeoJSON, { style: { color: '#1a7ad4', weight: 5, opacity: 0.85 } }).addTo(map);
 map.fitBounds(routeLine.getBounds().pad(0.08));
 
 const markers = [];
 stationsData.forEach((s, i) => {
-  const popupHTML = '<div class="station-popup">' +
+  const pop = '<div class="station-popup">' +
     '<div class="sp-hdr">🚉 #' + (s.num).toString().padStart(2,'0') + '. ' + s.name + '<span class="sp-en">' + s.name_en + '</span></div>' +
     '<div class="sp-stamp"><div class="sp-stamp-title">📬 印台位置</div><div class="sp-stamp-loc">' + s.stamp + '</div></div>' +
     '<div class="sp-row"><span class="label">⬅ 前站</span><span class="here">' + stationsData[(i-1+30)%30].name + '</span><span class="dist">' + stationDists[i].distFromPrev.toFixed(2) + ' km</span></div>' +
     '<div class="sp-row"><span class="label">📍 当前位置</span><span class="here">' + s.name + '</span><span class="dist">—</span></div>' +
     '<div class="sp-row"><span class="label">➡ 下一站</span><span class="here">' + stationsData[(i+1)%30].name + '</span><span class="dist">' + stationDists[i].distToNext.toFixed(2) + ' km</span></div>' +
-    '<div class="sp-row" style="border-top:1px solid rgba(30,150,252,0.15);margin-top:3px;padding-top:3px">' +
-    '<span class="label">📊 累計</span><span></span><span class="dist">' + s.dist_km.toFixed(1) + ' km</span></div></div>';
-  
-  const marker = L.circleMarker([s.lat, s.lon], { radius: 8, fillColor: '#1e96fc', color: '#fff', weight: 2, fillOpacity: 0.9 }).addTo(map);
-  marker.bindPopup(popupHTML, { maxWidth: 300 });
-  markers.push(marker);
-  
-  L.marker([s.lat, s.lon], { icon: L.divIcon({ className: '', html: '<div style="font-size:9px;font-weight:700;color:#1e96fc;text-shadow:0 0 4px #000;text-align:center;margin-top:-10px;">' + (s.num).toString().padStart(2,'0') + '</div>', iconSize: [0, 0], iconAnchor: [0, 0] }), interactive: false }).addTo(map);
+    '<div class="sp-row" style="border-top:1px solid rgba(30,150,252,0.15);margin-top:3px;padding-top:3px"><span class="label">📊 累計</span><span></span><span class="dist">' + s.dist_km.toFixed(1) + ' km</span></div></div>';
+  const m = L.circleMarker([s.lat, s.lon], { radius: 8, fillColor: '#1e96fc', color: '#fff', weight: 2, fillOpacity: 0.9 }).addTo(map);
+  m.bindPopup(pop, { maxWidth: 300 }); markers.push(m);
+  L.marker([s.lat, s.lon], { icon: L.divIcon({ className: '', html: '<div style="font-size:9px;font-weight:700;color:#1e96fc;text-shadow:0 0 4px #000;text-align:center;margin-top:-10px;">' + (s.num).toString().padStart(2,'0') + '</div>', iconSize: [0,0] }), interactive: false }).addTo(map);
 });
 
 const grid = document.getElementById('station-grid');
 stationsData.forEach((s, i) => {
-  const div = document.createElement('div');
-  div.className = 'station-item';
-  div.innerHTML = '<div class="num">' + (s.num).toString().padStart(2,'0') + '</div><div class="sname">' + s.name + '</div><div class="sdist">' + s.dist_km.toFixed(1) + 'km</div>';
-  div.addEventListener('click', function() { map.setView([s.lat, s.lon], 16); markers[i].openPopup(); });
-  grid.appendChild(div);
+  const d = document.createElement('div'); d.className = 'station-item';
+  d.innerHTML = '<div class="num">' + (s.num).toString().padStart(2,'0') + '</div><div class="sname">' + s.name + '</div><div class="sdist">' + s.dist_km.toFixed(1) + 'km</div>';
+  d.addEventListener('click', function() { map.setView([s.lat, s.lon], 16); markers[i].openPopup(); });
+  grid.appendChild(d);
 });
 
-new (L.Control.extend({
-  onAdd: function() {
-    const div = L.DomUtil.create('div', '');
-    div.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;">' +
-      '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div>' +
-      '<span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">48.8 km</span></div>' +
-      '<div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div>' +
-      '<span style="font-weight:500;">Stamp Station</span><span style="color:#6b7d99;">30</span></div></div>';
-    return div;
-  }
-}))({ position: 'bottomright' }).addTo(map);
+new (L.Control.extend({ onAdd: function() { const d = L.DomUtil.create('div',''); d.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">48.8 km</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div></div>'; return d; } }))({ position: 'bottomright' }).addTo(map);
 
 L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; CARTO').addTo(map);
 </script>
