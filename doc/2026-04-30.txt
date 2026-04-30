@@ -1,0 +1,24 @@
+Date: 2026-04-30
+
+Changed / amended / added / deleted
+
+- Amended index.html mobile layout for the bottom station list.
+- Changed the mobile station list from a wrapping grid into a single horizontal row.
+- Added native horizontal swipe support on mobile by using x-axis overflow scrolling, scroll snapping, and touch pan behavior.
+- Kept each mobile station item to one line with station number, station name, and cumulative distance.
+- Added this dated documentation file.
+- Deleted nothing.
+
+Decisions made
+
+- Kept the desktop station list as the existing multi-column grid.
+- Applied the one-line swipeable station tray only at small screen widths, currently max-width: 640px.
+- Used native browser scrolling instead of custom gesture JavaScript so mobile swipe behavior stays reliable and lightweight.
+- Kept the existing click behavior: tapping a station still centers the map and opens that station popup.
+
+What we have done
+
+- The bottom station tray on mobile now displays station info in a single row.
+- Swiping left moves forward through later stations.
+- Swiping right moves back to previous stations.
+- Station pills are scroll-snapped so the tray lands cleanly while browsing the list.

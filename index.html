@@ -52,7 +52,44 @@
   .station-item .sname { font-weight: 500; color: #c8d6e5; }
   .station-item .sdist { color: #6b7d99; font-size: 9px; margin-left: auto; }
 
-  @media (max-width: 480px) { .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; } .header-panel h1 { font-size: 14px; } .station-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); } }
+  @media (max-width: 640px) {
+    .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; }
+    .header-panel h1 { font-size: 14px; }
+    .station-list {
+      bottom: 12px;
+      left: 8px;
+      right: 8px;
+      max-height: none;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 7px 8px;
+      border-radius: 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+    }
+    .station-list::-webkit-scrollbar { height: 3px; width: 0; }
+    .station-grid {
+      display: flex;
+      grid-template-columns: none;
+      gap: 7px;
+      width: max-content;
+    }
+    .station-item {
+      flex: 0 0 auto;
+      min-width: 148px;
+      height: 34px;
+      padding: 5px 8px;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      scroll-snap-align: start;
+      white-space: nowrap;
+    }
+    .station-item:hover { border-left-color: transparent; border-bottom-color: #1e96fc; }
+    .station-item .num { width: 22px; height: 22px; font-size: 9px; }
+    .station-item .sname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 84px; }
+    .station-item .sdist { font-size: 10px; }
+  }
 </style>
 </head>
 <body>
