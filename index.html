@@ -48,9 +48,21 @@
   .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 3px; }
   .station-item { display: flex; align-items: center; gap: 5px; padding: 4px 7px; border-radius: 6px; cursor: pointer; transition: all 0.15s; font-size: 11px; border-left: 2px solid transparent; }
   .station-item:hover { background: rgba(30,150,252,0.1); border-left-color: #1e96fc; }
+  .station-item.active { background: rgba(30,150,252,0.18); border-left-color: #1e96fc; box-shadow: inset 0 0 0 1px rgba(30,150,252,0.18); }
   .station-item .num { font-weight: 700; color: #fff; background: #1e96fc; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 8px; flex-shrink: 0; }
   .station-item .sname { font-weight: 500; color: #c8d6e5; }
   .station-item .sdist { color: #6b7d99; font-size: 9px; margin-left: auto; }
+
+  .locate-control.leaflet-bar { border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.28); }
+  .locate-control button { width: 34px; height: 34px; border: none; border-radius: 6px; background: rgba(15,25,35,0.94); color: #c8d6e5; cursor: pointer; font-size: 17px; line-height: 34px; transition: all 0.2s ease; }
+  .locate-control button:hover { background: #1a2535; color: #fff; }
+  .locate-control button.tracking { background: #1e96fc; color: #fff; }
+  .locate-control button.locating { animation: locate-pulse 1s ease-in-out infinite; }
+  .user-location-icon { background: transparent; border: none; }
+  .user-location-pulse { width: 18px; height: 18px; border-radius: 50%; background: #14b8a6; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(20,184,166,0.28), 0 2px 10px rgba(0,0,0,0.35); position: relative; }
+  .user-location-pulse::after { content: ''; position: absolute; inset: -7px; border: 2px solid rgba(20,184,166,0.4); border-radius: 50%; animation: user-location-pulse 1.8s ease-out infinite; }
+  @keyframes locate-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.58; } }
+  @keyframes user-location-pulse { from { transform: scale(0.55); opacity: 0.9; } to { transform: scale(1.9); opacity: 0; } }
 
   @media (max-width: 640px) {
     .header-panel { min-width: 220px; max-width: 260px; padding: 10px 12px; }
@@ -86,6 +98,7 @@
       white-space: nowrap;
     }
     .station-item:hover { border-left-color: transparent; border-bottom-color: #1e96fc; }
+    .station-item.active { border-left-color: transparent; border-bottom-color: #1e96fc; }
     .station-item .num { width: 22px; height: 22px; font-size: 9px; }
     .station-item .sname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 84px; }
     .station-item .sdist { font-size: 10px; }
@@ -130,7 +143,124 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { 
 const routeLine = L.geoJSON(routeGeoJSON, { style: { color: '#1a7ad4', weight: 5, opacity: 0.85 } }).addTo(map);
 map.fitBounds(routeLine.getBounds().pad(0.08));
 
+const stationList = document.querySelector('.station-list');
+const stationItems = [];
 const markers = [];
+const STATION_PROXIMITY_METERS = 10;
+let activeStationIndex = null;
+let lastGpsStationIndex = null;
+let userLocationMarker = null;
+let userAccuracyCircle = null;
+let locateButton = null;
+let gpsTracking = false;
+let centeredOnFirstGpsFix = false;
+
+function focusStationButton(index, behavior = 'smooth') {
+  const item = stationItems[index];
+  if (!item || !stationList) return;
+
+  if (activeStationIndex !== null && stationItems[activeStationIndex]) {
+    stationItems[activeStationIndex].classList.remove('active');
+  }
+  activeStationIndex = index;
+  item.classList.add('active');
+
+  stationList.scrollTo({
+    left: item.offsetLeft - ((stationList.clientWidth - item.offsetWidth) / 2),
+    top: item.offsetTop - ((stationList.clientHeight - item.offsetHeight) / 2),
+    behavior: behavior
+  });
+}
+
+function nearestStationTo(latlng) {
+  return stationsData.reduce(function(nearest, station, index) {
+    const distance = map.distance(latlng, [station.lat, station.lon]);
+    return distance < nearest.distance ? { index: index, distance: distance } : nearest;
+  }, { index: -1, distance: Infinity });
+}
+
+function setLocateButtonState(state) {
+  if (!locateButton) return;
+  locateButton.classList.toggle('tracking', state === 'tracking');
+  locateButton.classList.toggle('locating', state === 'locating');
+}
+
+function updateUserLocation(e) {
+  const accuracy = Math.round(e.accuracy);
+  const popupText = 'GPS location<br>Accuracy: ' + accuracy + ' m';
+
+  if (!userLocationMarker) {
+    const userIcon = L.divIcon({
+      className: 'user-location-icon',
+      html: '<div class="user-location-pulse"></div>',
+      iconSize: [22, 22],
+      iconAnchor: [11, 11]
+    });
+    userLocationMarker = L.marker(e.latlng, { icon: userIcon, zIndexOffset: 1000 }).addTo(map).bindPopup(popupText);
+  } else {
+    userLocationMarker.setLatLng(e.latlng).setPopupContent(popupText);
+  }
+
+  if (!userAccuracyCircle) {
+    userAccuracyCircle = L.circle(e.latlng, {
+      radius: e.accuracy,
+      color: '#14b8a6',
+      weight: 1,
+      fillColor: '#14b8a6',
+      fillOpacity: 0.1
+    }).addTo(map);
+  } else {
+    userAccuracyCircle.setLatLng(e.latlng).setRadius(e.accuracy);
+  }
+
+  if (!centeredOnFirstGpsFix) {
+    map.setView(e.latlng, Math.max(map.getZoom(), 16));
+    centeredOnFirstGpsFix = true;
+  }
+
+  const nearest = nearestStationTo(e.latlng);
+  if (nearest.distance <= STATION_PROXIMITY_METERS) {
+    if (nearest.index !== lastGpsStationIndex) {
+      lastGpsStationIndex = nearest.index;
+      focusStationButton(nearest.index);
+    }
+  } else {
+    lastGpsStationIndex = null;
+  }
+
+  setLocateButtonState('tracking');
+}
+
+function handleLocationError(e) {
+  gpsTracking = false;
+  setLocateButtonState('idle');
+  alert(e.message);
+}
+
+function startGpsTracking() {
+  if (!navigator.geolocation) {
+    alert('GPS is not available in this browser.');
+    return;
+  }
+
+  gpsTracking = true;
+  centeredOnFirstGpsFix = false;
+  setLocateButtonState('locating');
+  map.locate({
+    watch: true,
+    setView: false,
+    enableHighAccuracy: true,
+    timeout: 15000,
+    maximumAge: 5000
+  });
+}
+
+function stopGpsTracking() {
+  gpsTracking = false;
+  map.stopLocate();
+  setLocateButtonState('idle');
+}
+
 stationsData.forEach((s, i) => {
   const pop = '<div class="station-popup">' +
     '<div class="sp-hdr">🚉 #' + (s.num).toString().padStart(2,'0') + '. ' + s.name + '<span class="sp-en">' + s.name_en + '</span></div>' +
@@ -142,6 +272,7 @@ stationsData.forEach((s, i) => {
   const m = L.circleMarker([s.lat, s.lon], { radius: 8, fillColor: '#1e96fc', color: '#fff', weight: 2, fillOpacity: 0.9 }).addTo(map);
   m.bindPopup(pop, { maxWidth: 300 });
   m.bindTooltip('<strong>' + s.name + '</strong><br>' + s.stamp, { direction: 'top', sticky: true, opacity: 0.95 });
+  m.on('popupopen', function() { focusStationButton(i); });
   markers.push(m);
   L.marker([s.lat, s.lon], { icon: L.divIcon({ className: '', html: '<div style="font-size:9px;font-weight:700;color:#1e96fc;text-shadow:0 0 4px #000;text-align:center;margin-top:-10px;">' + (s.num).toString().padStart(2,'0') + '</div>', iconSize: [0,0] }), interactive: false }).addTo(map);
 });
@@ -150,9 +281,32 @@ const grid = document.getElementById('station-grid');
 stationsData.forEach((s, i) => {
   const d = document.createElement('div'); d.className = 'station-item';
   d.innerHTML = '<div class="num">' + (s.num).toString().padStart(2,'0') + '</div><div class="sname">' + s.name + '</div><div class="sdist">' + s.dist_km.toFixed(1) + 'km</div>';
-  d.addEventListener('click', function() { map.setView([s.lat, s.lon], 16); markers[i].openPopup(); });
+  d.addEventListener('click', function() { focusStationButton(i); map.setView([s.lat, s.lon], 16); markers[i].openPopup(); });
+  stationItems.push(d);
   grid.appendChild(d);
 });
+
+map.on('locationfound', updateUserLocation);
+map.on('locationerror', handleLocationError);
+
+const LocateControl = L.Control.extend({
+  options: { position: 'topright' },
+  onAdd: function() {
+    const container = L.DomUtil.create('div', 'leaflet-bar locate-control');
+    locateButton = L.DomUtil.create('button', '', container);
+    locateButton.type = 'button';
+    locateButton.innerHTML = '◎';
+    locateButton.title = 'GPS';
+    locateButton.setAttribute('aria-label', 'GPS');
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.on(locateButton, 'click', function(e) {
+      L.DomEvent.stop(e);
+      gpsTracking ? stopGpsTracking() : startGpsTracking();
+    });
+    return container;
+  }
+});
+new LocateControl().addTo(map);
 
 new (L.Control.extend({ onAdd: function() { const d = L.DomUtil.create('div',''); d.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">42.2 km</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div></div>'; return d; } }))({ position: 'bottomright' }).addTo(map);
 

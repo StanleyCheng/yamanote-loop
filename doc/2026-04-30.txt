@@ -22,3 +22,19 @@ What we have done
 - Swiping left moves forward through later stations.
 - Swiping right moves back to previous stations.
 - Station pills are scroll-snapped so the tray lands cleanly while browsing the list.
+
+Additional update: GPS and station focus
+
+What changed
+
+- Added a GPS map control that starts and stops browser location tracking.
+- Added a user-location marker and accuracy circle that update when GPS fixes arrive.
+- Added automatic bottom station-button centering when a stamp marker popup opens.
+- Added automatic bottom station-button centering when GPS is within 10 meters of a stamp station.
+- Added an active station-button state so the focused station is visually clear.
+
+Why
+
+- The stamp rally map now works better while walking the route because the user can see their current GPS position.
+- The bottom station banner now stays synchronized with map interactions, reducing manual scrolling after selecting a stamp spot.
+- The 10-meter proximity behavior makes the station banner react automatically when the user arrives at a stamp station.
