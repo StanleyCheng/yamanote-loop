@@ -52,7 +52,6 @@
   .station-list::-webkit-scrollbar { width: 3px; }
   .station-list::-webkit-scrollbar-thumb { background: #1e96fc; border-radius: 3px; }
   .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 3px; }
-  .route-legend { position: absolute; right: 10px; z-index: 999; background: rgba(15,25,35,0.92); padding: 7px 11px; border-radius: 8px; font-size: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.4); border: 1px solid rgba(30,150,252,0.15); color: #c8d6e5; }
   .station-list.hidden { display: none; }
   .station-toggle { position: absolute; bottom: 16px; right: 10px; z-index: 1001; width: 38px; height: 38px; background: rgba(15,25,35,0.94); border: 1px solid rgba(30,150,252,0.2); border-radius: 10px; color: #c8d6e5; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.28); transition: all 0.2s ease; padding: 0; line-height: 1; }
   .station-toggle:hover { background: #1a2535; color: #fff; }
@@ -342,19 +341,11 @@ const LocateControl = L.Control.extend({
 });
 new LocateControl().addTo(map);
 
-const routeLegend = document.createElement('div');
-routeLegend.className = 'route-legend';
-routeLegend.innerHTML = '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">42.2 km</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div>';
-document.body.appendChild(routeLegend);
-
 function layoutBottomControls() {
   const stationToggle = document.getElementById('stationToggle');
   const listBottom = parseFloat(getComputedStyle(stationList).bottom) || 0;
   const listHeight = stationsCollapsed ? 0 : stationList.offsetHeight;
-  const baseBottom = listBottom + listHeight + 8;
-  stationToggle.style.bottom = baseBottom + 'px';
-  routeLegend.style.bottom = baseBottom + 'px';
-  routeLegend.style.right = '56px';
+  stationToggle.style.bottom = (listBottom + listHeight + 8) + 'px';
 }
 window.addEventListener('resize', layoutBottomControls);
 layoutBottomControls();
