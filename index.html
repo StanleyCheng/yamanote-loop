@@ -157,6 +157,8 @@ let userAccuracyCircle = null;
 let locateButton = null;
 let gpsTracking = false;
 let centeredOnFirstGpsFix = false;
+let trackLine = null;
+let trackPoints = [];
 
 function focusStationButton(index, behavior = 'smooth') {
   const item = stationItems[index];
@@ -214,6 +216,16 @@ function updateUserLocation(e) {
     }).addTo(map);
   } else {
     userAccuracyCircle.setLatLng(e.latlng).setRadius(e.accuracy);
+  }
+
+  const lastTrackPoint = trackPoints[trackPoints.length - 1];
+  if (!lastTrackPoint || map.distance(lastTrackPoint, e.latlng) >= 3) {
+    trackPoints.push(e.latlng);
+    if (!trackLine) {
+      trackLine = L.polyline(trackPoints, { color: '#ff0000', weight: 4, opacity: 0.85 }).addTo(map);
+    } else {
+      trackLine.setLatLngs(trackPoints);
+    }
   }
 
   if (!centeredOnFirstGpsFix) {
@@ -311,7 +323,7 @@ const LocateControl = L.Control.extend({
 });
 new LocateControl().addTo(map);
 
-new (L.Control.extend({ onAdd: function() { const d = L.DomUtil.create('div',''); d.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">42.2 km</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div></div>'; return d; } }))({ position: 'bottomright' }).addTo(map);
+new (L.Control.extend({ onAdd: function() { const d = L.DomUtil.create('div',''); d.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">42.2 km</span></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#ff0000;border-radius:2px;"></div><span style="font-weight:500;">Your Track</span><span style="color:#6b7d99;">GPS</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div></div>'; return d; } }))({ position: 'bottomright' }).addTo(map);
 
 L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; OpenMapTiles &copy; OpenFreeMap').addTo(map);
 </script>
