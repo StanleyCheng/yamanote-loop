@@ -19,6 +19,10 @@ There is no `src/`, package manager, build pipeline, or generated asset director
 
 The app loads Leaflet from `https://unpkg.com/leaflet@1.9.4`, so network access is required for a full map render unless the dependency is cached.
 
+## Deployment
+
+This project is published as a static GitHub Pages site. Push deployable changes so the live site is available at `https://stanleycheng.github.io/yamanote-loop/`.
+
 ## Coding Style & Naming Conventions
 
 Use plain HTML, CSS, and JavaScript. Keep formatting consistent with the existing file: two-space indentation in CSS/JS blocks, semicolons in JavaScript, and descriptive camelCase names such as `routeGeoJSON`, `stationsData`, and `stationDists`.
