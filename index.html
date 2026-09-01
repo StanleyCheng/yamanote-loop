@@ -6,6 +6,9 @@
 <title>山手線 Stamp Rally — Walkable Route</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.4/dist/leaflet-maplibre-gl.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', 'Noto Sans JP', -apple-system, sans-serif; background: #0f1923; }
@@ -138,7 +141,7 @@ function toggleHeader() { const p = document.getElementById('headerPanel'); cons
 
 const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([35.683, 139.734], 12);
 L.control.zoom({ position: 'topright' }).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM &copy; CARTO', maxZoom: 19 }).addTo(map);
+L.maplibreGL({ style: 'https://tiles.openfreemap.org/styles/positron', attribution: '&copy; OSM &copy; OpenMapTiles &copy; OpenFreeMap' }).addTo(map);
 
 const routeLine = L.geoJSON(routeGeoJSON, { style: { color: '#1a7ad4', weight: 5, opacity: 0.85 } }).addTo(map);
 map.fitBounds(routeLine.getBounds().pad(0.08));
@@ -310,7 +313,7 @@ new LocateControl().addTo(map);
 
 new (L.Control.extend({ onAdd: function() { const d = L.DomUtil.create('div',''); d.innerHTML = '<div style="background:rgba(15,25,35,0.92);padding:7px 11px;border-radius:8px;font-size:10px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(30,150,252,0.15);color:#c8d6e5;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:18px;height:3px;background:#1e96fc;border-radius:2px;"></div><span style="font-weight:500;">Walkable Route</span><span style="color:#6b7d99;">42.2 km</span></div><div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#1e96fc;border:1px solid #fff;"></div><span style="font-weight:500;">Stamp</span><span style="color:#6b7d99;">30</span></div></div>'; return d; } }))({ position: 'bottomright' }).addTo(map);
 
-L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; CARTO').addTo(map);
+L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; OpenMapTiles &copy; OpenFreeMap').addTo(map);
 </script>
 </body>
 </html>
