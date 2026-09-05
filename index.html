@@ -374,7 +374,7 @@ function stopGpsTracking() {
 stationsData.forEach((s, i) => {
   const pop = '<div class="station-popup">' +
     '<div class="sp-hdr">🚉 #' + (s.num).toString().padStart(2,'0') + '. ' + s.name + '<span class="sp-en">' + s.name_en + '</span></div>' +
-    '<div class="sp-stamp"><div class="sp-stamp-title">📬 印章位置</div><div class="sp-stamp-loc">' + s.stamp + '<br>' + s.stamp_zh + '</div><div class="sp-note">GPS: ' + s.lat.toFixed(6) + ', ' + s.lon.toFixed(6) + '</div></div>' +
+    '<div class="sp-stamp"><div class="sp-stamp-title">📬 印章位置</div><div class="sp-stamp-loc">' + s.stamp_zh + '</div><div class="sp-note">GPS: ' + s.lat.toFixed(6) + ', ' + s.lon.toFixed(6) + '</div></div>' +
     '<div class="sp-row"><span class="label">距路線（直線）</span><span class="dist">' + Math.round(s.route_offset_m) + ' m</span></div>' +
     '<div class="sp-row"><span class="label">⬅ 前站</span><span class="here">' + stationsData[(i-1+30)%30].name + '</span><span class="dist">' + stationDists[i].distFromPrev.toFixed(2) + ' km</span></div>' +
     '<div class="sp-row"><span class="label">📍 目前位置</span><span class="here">' + s.name + '</span><span class="dist">—</span></div>' +
@@ -386,7 +386,7 @@ stationsData.forEach((s, i) => {
     autoPanPaddingTopLeft: [10, 130],
     autoPanPaddingBottomRight: [10, 80]
   });
-  m.bindTooltip('<strong>' + s.name + '</strong><br>' + s.stamp + '<br>' + s.stamp_zh, { direction: 'top', sticky: true, opacity: 0.95 });
+  m.bindTooltip('<strong>' + s.name + '</strong><br>' + s.stamp_zh, { direction: 'top', sticky: true, opacity: 0.95 });
   m.on('popupopen', function() { focusStationButton(i); });
   markers.push(m);
   L.marker([s.lat, s.lon], { icon: L.divIcon({ className: '', html: '<div style="font-size:9px;font-weight:700;color:#1e96fc;text-shadow:0 0 4px #000;text-align:center;margin-top:-10px;">' + (s.num).toString().padStart(2,'0') + '</div>', iconSize: [0,0] }), interactive: false }).addTo(map);
