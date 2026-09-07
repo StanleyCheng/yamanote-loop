@@ -33,6 +33,13 @@
   .header-panel .stats .stat .val { font-weight: 700; color: #1e96fc; font-size: 15px; font-variant-numeric: tabular-nums; }
   .header-panel .stats .stat .lbl { color: #6b7d99; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; }
   .header-panel .route-note { color: #8a9bb5; font-size: 10px; line-height: 1.4; margin-top: 8px; }
+  .map-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 40px; margin-top: 10px; padding: 6px 10px; border: 1px solid rgba(30,150,252,0.25); border-radius: 7px; background: rgba(30,150,252,0.08); color: #c8d6e5; font: inherit; font-size: 11px; cursor: pointer; text-align: left; }
+  .map-toggle:hover { background: rgba(30,150,252,0.16); }
+  .map-toggle:focus-visible { outline: 2px solid #1e96fc; outline-offset: 3px; }
+  .map-switch { position: relative; width: 34px; height: 20px; flex-shrink: 0; border-radius: 10px; background: #43536b; transition: background 0.2s ease; }
+  .map-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform 0.2s ease; }
+  .map-toggle[aria-checked="true"] .map-switch { background: #1e96fc; }
+  .map-toggle[aria-checked="true"] .map-switch::after { transform: translateX(14px); }
 
   .station-popup { font-family: 'Segoe UI', 'Noto Sans JP', sans-serif; line-height: 1.5; min-width: 220px; }
   .station-popup .sp-hdr { font-size: 1.05em; font-weight: 600; color: #1e96fc; text-align: center; padding-bottom: 5px; border-bottom: 1px solid rgba(30,150,252,0.2); margin-bottom: 6px; }
@@ -119,8 +126,8 @@
 <body>
 
 <div class="header-wrapper">
-  <button class="header-toggle" id="headerToggle" onclick="toggleHeader()">🏃</button>
-  <div class="header-panel collapsed" id="headerPanel">
+  <button class="header-toggle" id="headerToggle" onclick="toggleHeader()" aria-expanded="false" aria-controls="headerPanel">🏃</button>
+  <div class="header-panel collapsed" id="headerPanel" inert>
     <div class="badge">⏱ Stamp Rally</div>
     <h1>🚃 山手線 Loop</h1>
     <div class="sub">GPX loop — JY01 → JY30 → JY01</div>
@@ -131,6 +138,9 @@
       <div class="stat"><div class="val" id="stationCount">30</div><div class="lbl">Stations</div></div>
     </div>
     <div class="route-note">Updated 7 Sep 2026. Distances follow the route; stamp access and stops are extra.</div>
+    <button class="map-toggle" id="mapToggle" type="button" role="switch" aria-checked="false" onclick="toggleMap()">
+      <span>Detailed OpenStreetMap</span><span class="map-switch" aria-hidden="true"></span>
+    </button>
     <div style="display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(30,150,252,0.15);font-size:10px;color:#c8d6e5;"><div style="width:18px;height:3px;background:#ff0000;border-radius:2px;"></div><span style="font-weight:500;">Your Track</span><span style="color:#6b7d99;">GPS</span></div>
   </div>
 </div>
@@ -223,7 +233,7 @@ document.getElementById('paceFiveTime').textContent = formatPaceTime(5);
 document.getElementById('stationCount').textContent = stationsData.length;
 
 let headerExpanded = false;
-function toggleHeader() { const p = document.getElementById('headerPanel'); const b = document.getElementById('headerToggle'); headerExpanded = !headerExpanded; p.classList.toggle('collapsed'); b.textContent = headerExpanded ? '✕' : '🏃'; b.style.borderRadius = headerExpanded ? '10px 0 0 10px' : '0 10px 10px 0'; }
+function toggleHeader() { const p = document.getElementById('headerPanel'); const b = document.getElementById('headerToggle'); headerExpanded = !headerExpanded; p.classList.toggle('collapsed'); p.inert = !headerExpanded; b.setAttribute('aria-expanded', String(headerExpanded)); b.textContent = headerExpanded ? '✕' : '🏃'; b.style.borderRadius = headerExpanded ? '10px 0 0 10px' : '0 10px 10px 0'; }
 
 let stationsCollapsed = false;
 function toggleStations() {
@@ -237,7 +247,23 @@ function toggleStations() {
 
 const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([35.683, 139.734], 12);
 L.control.zoom({ position: 'topright' }).addTo(map);
-L.maplibreGL({ style: 'https://tiles.openfreemap.org/styles/positron', attribution: '&copy; OSM &copy; OpenMapTiles &copy; OpenFreeMap' }).addTo(map);
+L.control.attribution({ prefix: false, position: 'bottomleft' }).addTo(map);
+const currentMapLayer = L.maplibreGL({
+  style: 'https://tiles.openfreemap.org/styles/positron',
+  attributionControl: { customAttribution: '<a href="https://openfreemap.org/">OpenFreeMap</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }
+}).addTo(map);
+const detailedMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxNativeZoom: 19,
+  maxZoom: 24,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+function toggleMap() {
+  const showDetailedMap = !map.hasLayer(detailedMapLayer);
+  map.removeLayer(showDetailedMap ? currentMapLayer : detailedMapLayer);
+  (showDetailedMap ? detailedMapLayer : currentMapLayer).addTo(map);
+  document.getElementById('mapToggle').setAttribute('aria-checked', String(showDetailedMap));
+}
 
 const routeLine = L.geoJSON(routeGeoJSON, { style: { color: '#1a7ad4', weight: 5, opacity: 0.85 } }).addTo(map);
 
@@ -439,7 +465,6 @@ function layoutBottomControls() {
 window.addEventListener('resize', layoutBottomControls);
 layoutBottomControls();
 
-L.control.attribution({ prefix: false, position: 'bottomleft' }).addAttribution('&copy; OSM &copy; OpenMapTiles &copy; OpenFreeMap').addTo(map);
 </script>
 </body>
 </html>

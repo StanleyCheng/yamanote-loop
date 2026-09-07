@@ -21,7 +21,7 @@ This is a self-contained single-file web application displaying a walking/runnin
 - **No npm/node dependencies** — Pure HTML/CSS/JS
 
 The inline JavaScript sets up:
-1. A Leaflet map centered on Tokyo with dark tiles
+1. A Leaflet map centered on Tokyo with OpenFreeMap Positron by default and a Detailed OpenStreetMap switch inside the Stamp Rally panel
 2. The full route as a polyline (`routeGeoJSON` GeoJSON object)
 3. Circle markers for all 30 stations with numbered labels
 4. Popup content showing station name (JP + EN), stamp location, prev/next station distances, cumulative distance
@@ -50,4 +50,4 @@ python3 -m http.server 8000
 
 **Styling:** CSS is inline in the `<style>` block. Main color is `#1e96fc` (Garmin blue). Popup styles use `.station-popup` class. Map background is dark navy (`#0f1923`).
 
-**Map tiles:** Uses Carto's dark_matter tiles via `https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png`
+**Map tiles:** The Stamp Rally panel switches immediately between OpenFreeMap Positron (`https://tiles.openfreemap.org/styles/positron`) and standard OpenStreetMap tiles (`https://tile.openstreetmap.org/{z}/{x}/{y}.png`). Only the active base layer is attached to the map; route, station and GPS layers stay in place. Attribution follows the active provider. OSM tiles use native zoom levels up to 19 and scale up to zoom 24.
